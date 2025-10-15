@@ -3,25 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kuromi & My Melody Birthday Surprise</title>
+<title>Happy Birthday Minnie 🎉</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
   body {
     margin: 0;
     font-family: 'Comic Neue', cursive, sans-serif;
-    background: linear-gradient(135deg, #ffcee4, #d5a6bd);
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
     overflow-x: hidden;
     text-align: center;
     color: #fff;
-    position: relative;
     min-height: 100vh;
+    position: relative;
   }
+
   header {
     padding: 20px;
-    font-size: 2.5em;
+    font-size: 2.8em;
     font-weight: bold;
-    text-shadow: 2px 2px #3a273a;
+    text-shadow: 2px 2px #a84467;
   }
 
   /* Confetti Canvas */
@@ -38,8 +39,8 @@
   /* Birthday Cake */
   .cake {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     margin: 40px auto 20px;
     background: #f5a9b8;
     border-radius: 0 0 50% 50% / 0 0 100% 100%;
@@ -48,10 +49,10 @@
   .cake:before, .cake:after {
     content: '';
     position: absolute;
-    width: 180px;
-    height: 100px;
+    width: 160px;
+    height: 90px;
     left: 10px;
-    background: #f897b5;
+    background: #e68aa6;
     border-radius: 90px/60px;
   }
   .cake:before {
@@ -65,20 +66,20 @@
   }
   .candle {
     position: absolute;
-    top: -50px;
-    left: calc(50% - 10px);
-    width: 20px;
-    height: 50px;
-    background: #d95179;
+    top: -44px;
+    left: calc(50% - 8px);
+    width: 16px;
+    height: 44px;
+    background: #d2446d;
     border-radius: 4px;
-    box-shadow: 0 0 10px #f9d423;
+    box-shadow: 0 0 8px #f9d423;
   }
   .flame {
     position: absolute;
-    top: -25px;
+    top: -22px;
     left: 50%;
-    width: 12px;
-    height: 20px;
+    width: 10px;
+    height: 18px;
     background: radial-gradient(circle at center, #ffec4d, #ff9a3d);
     border-radius: 50% 50% 0 50%;
     transform: translateX(-50%) rotate(20deg);
@@ -97,15 +98,15 @@
 
   /* Gift Box */
   .gift-box {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     margin: 30px auto;
-    background: #704f68;
-    border-radius: 15px;
+    background: #a94c7d;
+    border-radius: 20px;
     position: relative;
     cursor: pointer;
-    box-shadow: 0 0 10px #cfa9ce;
-    transition: transform 0.8s ease;
+    box-shadow: 0 0 14px #ecb4c8;
+    transition: transform 1s ease;
     z-index: 20;
   }
   .gift-ribbon {
@@ -113,14 +114,14 @@
     top: 50%;
     left: 50%;
     width: 20px;
-    height: 150px;
-    background: #c77aad;
+    height: 140px;
+    background: #e370a4;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     z-index: 2;
   }
   .gift-ribbon.horizontal {
-    width: 150px;
+    width: 140px;
     height: 20px;
     top: 50%;
     left: 50%;
@@ -131,11 +132,11 @@
   .surprise-message {
     display: none;
     font-size: 1.8em;
-    margin-top: 20px;
+    margin-top: 25px;
     color: #fff;
-    text-shadow: 1px 1px 3px #000;
+    text-shadow: 1px 1px 3px #6a2041;
     animation: popIn 0.5s forwards;
-    max-width: 80%;
+    max-width: 85%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -144,10 +145,10 @@
     100% {transform: scale(1); opacity: 1;}
   }
 
-  /* Cute stickers container */
+  /* Stickers container */
   .stickers {
     position: fixed;
-    top: 10%;
+    top: 12%;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
@@ -160,38 +161,38 @@
     position: absolute;
     width: 60px;
     height: 60px;
-    opacity: 0.85;
+    opacity: 0.9;
     animation: floatUpDown ease-in-out infinite;
   }
 
   .sticker1 {
-    left: 0%;
+    left: 5%;
     animation-duration: 6s;
   }
   .sticker2 {
-    left: 10%;
+    left: 15%;
     animation-duration: 5s;
     animation-delay: 1s;
   }
   .sticker3 {
-    left: 20%;
+    left: 30%;
     animation-duration: 7s;
     animation-delay: 2s;
   }
   .sticker4 {
-    left: 30%;
+    left: 45%;
     animation-duration: 6.5s;
     animation-delay: 3s;
   }
   .sticker5 {
-    left: 40%;
+    left: 60%;
     animation-duration: 5.5s;
     animation-delay: 4s;
   }
 
   @keyframes floatUpDown {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-18px); }
   }
 
   /* Love message */
@@ -201,19 +202,18 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    background: rgba(255, 182, 193, 0.5);
-    border-radius: 15px;
-    padding: 20px;
-    color: #311432;
-    box-shadow: 0 0 20px #fff5f8;
+    background: rgba(255, 182, 193, 0.55);
+    border-radius: 18px;
+    padding: 22px;
+    color: #4a1327;
+    box-shadow: 0 0 22px #f8c5d1;
     font-weight: bold;
-    line-height: 1.4em;
+    line-height: 1.5em;
   }
-
 </style>
 </head>
 <body>
-<header>Happy Birthday, minniepie! 🎉</header>
+<header>Happy Birthday, minnie! 🎉</header>
 
 <div class="cake">
   <div class="candle">
@@ -229,22 +229,22 @@
 <canvas id="confetti-canvas"></canvas>
 
 <div class="surprise-message" id="surpriseMessage">
-  🎈 Surprise, minniepie! Wishing you the happiest birthday ever! 🎂🎉💖
+  🎈 Surprise, minnieeeee i will be waiting for you.... hope you are doing well ..... 🎂🎉💖
 </div>
 
 <div class="love-message">
-  Dear minniepie, <br>
-  Wishing you endless happiness, love, and joy.<br>
-  May your days be filled with laughter, sweetness, and warm moments.<br>
-  You deserve all the love and blessings in the world! 💖🎀
+  To my dearest minnie,<br />
+  May your birthday be filled with sweet moments, laughter, and all the love in the world.<br />
+  I'm so lucky to have you. Here's to many more beautiful memories together! 💕🎀
 </div>
 
 <div class="stickers">
-  <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Kuromi" class="sticker sticker1" />
-  <img src="https://cdn-icons-png.flaticon.com/512/616/616428.png" alt="My Melody" class="sticker sticker2" />
-  <img src="https://cdn-icons-png.flaticon.com/512/616/616454.png" alt="Heart" class="sticker sticker3" />
-  <img src="https://cdn-icons-png.flaticon.com/512/616/616426.png" alt="Bow" class="sticker sticker4" />
-  <img src="https://cdn-icons-png.flaticon.com/512/616/616462.png" alt="Flower" class="sticker sticker5" />
+  <!-- Kuromi and My Melody stickers from safe URLs -->
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616409.png" alt="Kuromi" class="sticker sticker1" />
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616427.png" alt="My Melody" class="sticker sticker2" />
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616456.png" alt="Heart" class="sticker sticker3" />
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616424.png" alt="Ribbon" class="sticker sticker4" />
+  <img src="https://cdn-icons-png.flaticon.com/512/616/616460.png" alt="Flower" class="sticker sticker5" />
 </div>
 
 <script>
