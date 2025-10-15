@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Minnie 🎂</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --accent:#ff5c9e; /* pink */
+      --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --radius:18px;
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background: radial-gradient(1200px 600px at 10% 20%, rgba(255,92,158,0.08), transparent), radial-gradient(800px 400px at 90% 80%, rgba(80,120,255,0.04), transparent), var(--bg);}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:48px}
+
+    .card{
+      width:980px;max-width:calc(100% - 40px);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:20px;padding:28px;box-shadow:0 10px 40px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden
+    }
+
+    header{display:flex;gap:20px;align-items:center}
+    .avatar{width:92px;height:92px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7ad8ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:28px;box-shadow:0 6px 30px rgba(255,92,158,0.12)}
+    h1{margin:0;font-size:28px;color:#fff}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+
+    /* left panel */
+    .stage{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);min-height:420px;position:relative}
+
+    .greeting{display:flex;flex-direction:column;gap:12px}
+    .greeting h2{font-size:22px;margin:0}
+    .greeting .wish{font-size:18px;color:#f8f6ff}
+
+    .surprise-box{width:240px;height:240px;margin:18px auto 8px;border-radius:14px;background:linear-gradient(180deg,#1b2430,#0a0f15);display:grid;place-items:center;position:relative;box-shadow:0 10px 30px rgba(2,6,23,0.6);cursor:pointer;border:3px solid rgba(255,255,255,0.03);}
+    .box-lid{position:absolute;top:24px;left:50%;transform:translateX(-50%);width:88%;height:48px;background:linear-gradient(135deg,#ff7aa8,#e0b0ff);border-radius:10px 10px 6px 6px;transition:transform .6s cubic-bezier(.2,.9,.3,1);transform-origin:center top}
+    .box-body{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:88%;height:160px;background:linear-gradient(180deg,#fff 0%, #ffd9ec 100%);opacity:0;transform-origin:center bottom;border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:center;}
+
+    .open .box-lid{transform:translateX(-50%) rotateX(70deg) translateY(-26px)}
+    .open .box-body{opacity:1}
+
+    .btns{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:12px;border:0;cursor:pointer;font-weight:600;box-shadow:0 8px 20px rgba(255,92,158,0.12)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* confetti canvas sits above stage */
+    canvas#confetti{position:absolute;inset:0;pointer-events:none}
+
+    /* right column */
+    .side{background:var(--glass);padding:18px;border-radius:14px;min-height:420px;border:1px solid rgba(255,255,255,0.02);}
+    .side h3{margin:0 0 8px 0}
+    .controls{display:flex;flex-direction:column;gap:12px}
+
+    .confession-area{margin-top:12px}
+    textarea{width:100%;min-height:120px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(rgba(3,6,12,0.6),rgba(3,6,12,0.9));backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .25s}
+    .modal.open{opacity:1;pointer-events:auto}
+    .panel{width:720px;max-width:92%;background:linear-gradient(180deg,#071024,#0b1220);padding:24px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 60px rgba(2,6,23,0.7)}
+    .panel h2{margin:0 0 6px 0}
+    .typed{font-family: "Courier New", monospace;background:linear-gradient(90deg,#ff7aa8,#7ad8ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* small screens */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr;}
+      .side{order:2}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <canvas id="confetti"></canvas>
+      <header>
+        <div class="avatar" aria-hidden>MM</div>
+        <div>
+          <h1 id="title">Happy Birthday, Minnie!</h1>
+          <p class="lead">A little surprise site made with ❤️ — click the box below to begin.</p>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <button id="musicToggle" class="btn secondary" aria-pressed="false">Play Violin</button>
+          <button id="confessBtn" class="btn" title="Open confession page">Confess 🎙️</button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="stage" aria-label="Main stage">
+          <div class="greeting">
+            <h2>Dear Minnie,</h2>
+            <p class="wish">Wishing you a day full of love, surprises and music. Open the surprise box — I promise it'll be magical ✨</p>
+          </div>
+
+          <div class="surprise-box" id="surprise" role="button" tabindex="0" aria-pressed="false" aria-label="Open surprise box">
+            <div class="box-lid"></div>
+            <div class="box-body" id="boxContent">
+              <div style="text-align:center">
+                <h3 style="margin:0">Surprise!</h3>
+                <p style="margin:6px 0 0;color:#06243f">You've got a message — and a little confetti.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align:center">
+            <div class="btns">
+              <button class="btn" id="openSurprise">Open Surprise</button>
+              <button class="btn secondary" id="resetSurprise">Reset</button>
+            </div>
+          </div>
+
+          <div style="position:absolute;right:22px;bottom:18px;color:var(--muted);font-size:13px">Tap or press Enter on the box</div>
+        </section>
+
+        <aside class="side" aria-label="Controls & confession">
+          <h3>Little controls</h3>
+          <div class="controls">
+            <div>
+              <strong>Music</strong>
+              <div style="margin-top:8px">Toggle the violin music to set the mood. (Replace <code>violin.mp3</code> in the same folder with any violin track you like.)</div>
+            </div>
+
+            <div class="confession-area" aria-hidden>
+              <label for="note"><strong>Your confession / wish</strong></label>
+              <textarea id="note" placeholder="Type something sweet..." maxlength="280"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn" id="sendConfession">Send to Minnie</button>
+                <button class="btn secondary" id="clearNote">Clear</button>
+              </div>
+              <div id="noteSent" style="display:none;margin-top:8px;color:var(--muted)"></div>
+            </div>
+
+            <div style="border-top:1px dashed rgba(255,255,255,0.02);padding-top:12px">
+              <strong>Decorations</strong>
+              <div style="margin-top:8px">Confetti bursts when surprise is opened. You can click <em>Reset</em> to try again.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <footer>Made with code + care • Customize the messages, colors and the violin track.</footer>
+    </div>
+  </div>
+
+  <!-- Modal / confession page -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="panel" role="document">
+      <h2>Confession & Surprise</h2>
+      <p class="muted">Write something honest, sweet, silly — then hit reveal to show Minnie.</p>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <input id="confName" placeholder="Your name" style="flex:0 0 160px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
+        <input id="confTitle" placeholder="Short title (e.g. 'A small secret')" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
+      </div>
+      <textarea id="confText" placeholder="Type your confession here..." style="margin-top:12px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;min-height:120px"></textarea>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn" id="revealConf">Reveal to Minnie</button>
+        <button class="btn secondary" id="closeModal">Close</button>
+      </div>
+
+      <div id="revealArea" style="margin-top:18px;display:none">
+        <h3 id="revealTitle"></h3>
+        <p class="typed" id="revealText"></p>
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">(Violin will play while the message types out.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- audio (replace file with your own named violin.mp3 in same folder) -->
+  <audio id="violin" loop preload="auto">
+    <source src="violin.mp3" type="audio/mpeg">
+    <!-- If you want to use an online file, change the src to a URL here. -->
+  </audio>
+
+  <script>
+    // Elements
+    const surprise = document.getElementById('surprise');
+    const openBtn = document.getElementById('openSurprise');
+    const resetBtn = document.getElementById('resetSurprise');
+    const card = document.querySelector('.card');
+    const confettiCanvas = document.getElementById('confetti');
+    const musicToggle = document.getElementById('musicToggle');
+    const violin = document.getElementById('violin');
+    const confessBtn = document.getElementById('confessBtn');
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
+    const revealConf = document.getElementById('revealConf');
+    const revealArea = document.getElementById('revealArea');
+    const revealText = document.getElementById('revealText');
+    const revealTitle = document.getElementById('revealTitle');
+    const note = document.getElementById('note');
+    const sendConfession = document.getElementById('sendConfession');
+    const noteSent = document.getElementById('noteSent');
+
+    // Confetti setup (lightweight)
+    const ctx = confettiCanvas.getContext('2d');
+    let W, H, particles = [], raf;
+
+    function resizeCanvas(){
+      confettiCanvas.width = W = confettiCanvas.clientWidth;
+      confettiCanvas.height = H = confettiCanvas.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function random(min, max){return Math.random()*(max-min)+min}
+    function createParticles(x,y){
+      const count = 26;
+      for(let i=0;i<count;i++){
+        particles.push({x:x||W/2,y:y||H/2, vx:random(-6,6), vy:random(-9,-2), size:random(6,14), rot:random(0,360), spin:random(-0.2,0.2), life:random(60,140), hue:Math.floor(random(0,360))});
+      }
+      if(!raf) loop();
+    }
+
+    function loop(){
+      raf = requestAnimationFrame(loop);
+      ctx.clearRect(0,0,W,H);
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.vy += 0.25; // gravity
+        p.x += p.vx; p.y += p.vy; p.rot += p.spin; p.life--;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.fillStyle = `hsl(${p.hue} 80% 60%)`;
+        ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+        ctx.restore();
+        if(p.y>H+60 || p.life<=0) particles.splice(i,1);
+      }
+      if(particles.length===0){ cancelAnimationFrame(raf); raf=null }
+    }
+
+    // Surprise open/close
+    function openSurpriseBox(triggeredByUser=true){
+      if(!card.classList.contains('open')){
+        card.classList.add('open');
+        surprise.classList.add('open');
+        surprise.setAttribute('aria-pressed','true');
+        if(triggeredByUser){ createParticles(); }
+        // soft spotlight animation
+        document.body.animate([{filter:'brightness(1)'},{filter:'brightness(1.06)'},{filter:'brightness(1)'}],{duration:1400,easing:'ease-in-out'});
+      }
+    }
+    function resetSurpriseBox(){
+      card.classList.remove('open');
+      surprise.classList.remove('open');
+      surprise.setAttribute('aria-pressed','false');
+      particles = [];
+      ctx.clearRect(0,0,W,H);
+    }
+
+    openBtn.addEventListener('click', ()=> openSurpriseBox());
+    surprise.addEventListener('click', ()=> openSurpriseBox());
+    surprise.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') openSurpriseBox(); });
+    resetBtn.addEventListener('click', resetSurpriseBox);
+
+    // Music
+    let musicPlaying = false;
+    musicToggle.addEventListener('click', ()=>{
+      if(!musicPlaying){
+        violin.play().catch(()=>{});
+        musicToggle.textContent = 'Pause Violin';
+        musicToggle.classList.remove('secondary');
+        musicPlaying = true;
+        musicToggle.setAttribute('aria-pressed','true');
+      } else {
+        violin.pause();
+        musicToggle.textContent = 'Play Violin';
+        musicToggle.classList.add('secondary');
+        musicPlaying = false;
+        musicToggle.setAttribute('aria-pressed','false');
+      }
+    });
+
+    // Confession modal
+    confessBtn.addEventListener('click', ()=>{
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      // focus first input
+      setTimeout(()=>document.getElementById('confName').focus(),120);
+    });
+    closeModal.addEventListener('click', ()=>{ closeConfession(); });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeConfession(); });
+
+    function closeConfession(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      revealArea.style.display='none';
+      stopTyping();
+    }
+
+    // typed message reveal
+    let typingTimer;
+    function typeOut(text, el, speed=28, callback){
+      el.textContent='';
+      let i=0;
+      stopTyping();
+      typingTimer = setInterval(()=>{
+        el.textContent += text.charAt(i);
+        i++; if(i>=text.length){ stopTyping(); if(callback) callback(); }
+      }, speed);
+    }
+    function stopTyping(){ if(typingTimer){ clearInterval(typingTimer); typingTimer = null; } }
+
+    revealConf.addEventListener('click', ()=>{
+      const name = document.getElementById('confName').value.trim() || 'Someone';
+      const title = document.getElementById('confTitle').value.trim() || 'A small secret';
+      const text = document.getElementById('confText').value.trim() || 'I hope your birthday is as wonderful as you are.';
+      revealTitle.textContent = `${title} — ${name}`;
+      revealArea.style.display = 'block';
+      // play violin and type
+      violin.currentTime = 0; violin.play().catch(()=>{});
+      // change play button state
+      musicToggle.textContent = 'Pause Violin'; musicToggle.setAttribute('aria-pressed','true');
+      musicPlaying = true;
+      typeOut(text, revealText, 32, ()=>{
+        // after typing
+      });
+    });
+
+    // send short confession from side panel
+    sendConfession.addEventListener('click', ()=>{
+      const t = note.value.trim();
+      if(!t){ noteSent.style.display='block'; noteSent.textContent='Please type something first.'; return; }
+      noteSent.style.display='block'; noteSent.textContent='Sent! Minnie will see it when you reveal the surprise.';
+      // auto-fill confession modal text so user can reveal later
+      document.getElementById('confText').value = t;
+      document.getElementById('confTitle').value = 'A little wish';
+      document.getElementById('confName').value = 'A friend';
+    });
+    document.getElementById('clearNote').addEventListener('click', ()=>{ note.value=''; noteSent.style.display='none'; });
+
+    // accessibility: close on Esc
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ if(modal.classList.contains('open')) closeConfession(); else resetSurpriseBox(); } });
+
+    // small niceties: double-click surprise to trigger bigger confetti
+    surprise.addEventListener('dblclick', (e)=>{ createParticles(e.clientX - confettiCanvas.getBoundingClientRect().left, e.clientY - confettiCanvas.getBoundingClientRect().top); createParticles(); createParticles(); });
+
+    // attempt autoplay politely - many browsers block. We rely on user gestures (buttons) to start music.
+
+    // Provide a download/share button (optional) - keep minimal: user can save the page.
+
+    // initial resize
+    resizeCanvas();
+
+    // Friendly hint: if violin file missing, button won't play. No remote audio included for privacy.
+  </script>
+</body>
+</html>
